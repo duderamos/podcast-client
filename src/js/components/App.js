@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import Podcast from './Podcast.js';
+import PodcastFeed from './PodcastFeed.js';
 
 const App = () => {
-  return(
+  return (
     <div>
-      <h1>Hello</h1>
+      <Podcast/>
+      <PodcastFeed/>
     </div>
   )
 }
