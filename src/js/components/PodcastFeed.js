@@ -1,13 +1,10 @@
 import React from 'react';
+import Episode from './Episode';
 import { Query } from 'react-apollo';
-import ReactAudioPlayer from 'react-audio-player';
 import { GET_EPISODES } from '../graphql/Queries';
+import './PodcastFeed.css';
 
 class PodcastFeed extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <Query query={GET_EPISODES}>
@@ -16,18 +13,10 @@ class PodcastFeed extends React.Component {
           if (error) return `Something went wrong :( ${error.message}`;
 
           return (
-            <div>
+            <div className="feed">
               {
                 data.episodes.map((episode, index) => {
-                  return (
-                    <div key={index}>
-                      <div>{episode.title}</div>
-                      <ReactAudioPlayer
-                        src={episode.url}
-                        controls={true}
-                      />
-                    </div>
-                  );
+                  return <div key={index}><Episode episode={episode}/></div>
                 })
               }
             </div>

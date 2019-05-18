@@ -1,6 +1,7 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import { GET_PODCAST } from '../graphql/Queries';
+import './Podcast.css';
 
 class Podcast extends React.Component {
   constructor(props) {
@@ -19,9 +20,9 @@ class Podcast extends React.Component {
           if (error) return `Something went wrong :( ${error.message}`;
 
           return (
-            <div>
+            <div className="title">
               <h1>{data.podcast.title}</h1>
-              <p>
+              <p className="description">
                 {data.podcast.description}
               </p>
               <abbr>
