@@ -16,6 +16,7 @@ const GET_EPISODES = gql`
       _id
       title
       url
+      currentTime
     }
   }
 `;

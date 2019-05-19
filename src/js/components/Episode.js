@@ -9,6 +9,11 @@ class Episode extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    const { episode } = this.props;
+    this.rap.audioEl.currentTime = episode.currentTime;
+  }
+
   render() {
     const { episode } = this.props;
     return (
@@ -23,6 +28,7 @@ class Episode extends React.Component {
                 saveCurrentTime({ variables: { episodeId: episode._id, currentTime: currentTime }});
               }}
               listenInterval={5000}
+              ref={(element) => { this.rap = element}}
         />)}
       </Mutation>
       </div>
