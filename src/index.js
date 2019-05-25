@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import App from './js/components/App.js';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
+import './main.css';
 
-const client = new ApolloClient({ uri: 'http://lvh.me:3000/graphql' });
+const client = new ApolloClient({ uri: 'http://lvh.me:3000/api' });
 
 ReactDOM.render(
   <ApolloProvider client={client}>
