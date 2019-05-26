@@ -1,5 +1,5 @@
 .player-box {
-  background-color: #ddd;
+  background-color: #454343;
   height: 60px;
 }
 
@@ -8,4 +8,10 @@
   vertical-align: middle;
   line-height: normal;
   font-size: 50px;
+}
+
+#progress-circle {
+  background-color: #f00;
+  display: block;
+  fill: #ccc;
 }
