@@ -40,7 +40,7 @@ class Player extends React.Component {
 
   updatePlayedAngle = () => {
     const pi = Math.PI;
-    let angle = (this.audio.currentTime * 360) / this.audio.duration;
+    let angle = (this.state.played * 360) / this.audio.duration;
     if (Number.isNaN(this.audio.duration)) return;
     let r = ( angle * pi / 180 )
     let x = Math.sin( r ) * 25
@@ -50,42 +50,70 @@ class Player extends React.Component {
     this.setState({ playedAngle: anim });
   }
 
+  backwards = () => {
+    this.audio.currentTime -= 10;
+  }
+
+  forwards = () => {
+    this.audio.currentTime += 10;
+  }
+
+  timeFormatted = (time) => {
+    time = parseFloat(time);
+    const hours = Math.floor(time / 60 / 60);
+    const minutes = Math.floor(time / 60) % 60;
+    const seconds = Math.floor(time - minutes * 60);
+
+    let timeString = "";
+    if (hours > 0) timeString += hours.toString().padStart(2, 0) + ':';
+    timeString += minutes.toString().padStart(2, 0) + ':';
+    timeString += seconds.toString().padStart(2, 0);
+    return timeString;
+  }
+
   render() {
     const { episode } = this.props;
     return (
       <div className="player-box">
+        <div id="progress-circle">
+          <svg
+            style={{verticalAlign: "middle"}}
+            width="50" height="50"
+          >
+            <path
+              id="progress-circle"
+              transform="translate(25, 25) scale(.95)"
+              d={this.state.playedAngle}
+            />
+            <circle transform="translate(25, 25)" cx="0" cy="0" r="20" fill="#454343" />
+          </svg>
+        </div>
         <div>
-          <div style={{display: "inline", position: "relative", left: "0px"}}>
-            <svg
-              style={{verticalAlign: "middle"}}
-              width="50" height="50"
-            >
-              <path
-                id="progress-circle"
-                transform="translate(25, 25) scale(.95)"
-                d={this.state.playedAngle}
-              />
-              <circle transform="translate(25, 25)" cx="0" cy="0" r="20" fill="#454343" />
-            </svg>
+          <i className="material-icons player-icon" onClick={this.backwards}>replay_10</i>
+        </div>
+        <div style={{zIndex: 99}}>
+          <i className="material-icons player-icon" onClick={this.togglePlay}>{this.state.playIcon}</i>
+        </div>
+        <div>
+          <i className="material-icons player-icon" onClick={this.forwards}>forward_10</i>
+        </div>
+        <div stype={{display: 'flex', flexDirection: 'column'}}>
+          <div>
+            {episode.title}
           </div>
-          <div style={{display: "inline"}}>
-            <i className="material-icons player-icon">replay_10</i>
+          <div>
+            {this.audio &&
+              this.timeFormatted(this.state.played)
+            }
           </div>
-          <div style={{display: "inline"}}>
-              <i className="material-icons player-icon" onClick={this.togglePlay}>{this.state.playIcon}</i>
-          </div>
-          <div style={{display: "inline"}}>
-            <i className="material-icons player-icon">forward_10</i>
-          </div>
-          {episode.title}
         </div>
         <Mutation mutation={SAVE_CURRENT_TIME}>
           {(saveCurrentTime, { data }) => (
             <audio
               src={episode.url}
-              preload="auto"
+              preload="metadata"
               onTimeUpdate={() => {
-                if ((Math.round(this.audio.currentTime) % 5) == 0) {
+                if ((Math.round(this.state.played) % 5) == 0) {
                   saveCurrentTime({ variables: { episodeId: episode._id, currentTime: this.audio.currentTime }});
                 }
                 this.setState({ played: this.audio.currentTime });
@@ -93,9 +121,9 @@ class Player extends React.Component {
               }}
               ref={(audio) => { this.audio = audio }}
             />
-            )}
-          </Mutation>
-        </div>
+          )}
+        </Mutation>
+      </div>
     );
   }
 }
