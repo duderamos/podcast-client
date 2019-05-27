@@ -1,6 +1,5 @@
 import React from 'react';
 import ApolloClient from 'apollo-boost';
-import ReactAudioPlayer from 'react-audio-player';
 import { Mutation } from 'react-apollo';
 import { SAVE_CURRENT_TIME } from '../graphql/Mutations';
 
