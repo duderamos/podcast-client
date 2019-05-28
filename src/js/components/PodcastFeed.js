@@ -2,7 +2,6 @@ import React from 'react';
 import Episode from './Episode';
 import { Query } from 'react-apollo';
 import { GET_EPISODES } from '../graphql/Queries';
-import './PodcastFeed.css';
 
 class PodcastFeed extends React.Component {
   render() {

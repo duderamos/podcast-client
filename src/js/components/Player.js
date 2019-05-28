@@ -3,14 +3,12 @@ import ApolloClient from 'apollo-boost';
 import { Mutation } from 'react-apollo';
 import { SAVE_CURRENT_TIME } from '../graphql/Mutations';
 
-import './Player.css';
-
 class Player extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      play: false,
+      playing: false,
       playIcon: "play_circle_filled",
       played: 0,
       playedAngle: ""
@@ -25,13 +23,13 @@ class Player extends React.Component {
   togglePlay = () => {
     if (this.state.play) {
       this.setState({
-        play: false,
+        playing: false,
         playIcon: "play_circle_filled"
       });
       this.audio.pause();
     } else {
       this.setState({
-        play: true,
+        playing: true,
         playIcon: "pause_circle_filled"
       });
       this.audio.play();

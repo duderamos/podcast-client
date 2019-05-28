@@ -1,3 +1,49 @@
+body {
+  font-family: Roboto, Helvetica, Arial;
+}
+
 button {
   border: 0;
+}
+
+.player-box {
+  background-color: #454343;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-icon {
+  vertical-align: middle;
+  line-height: normal;
+  font-size: 50px;
+}
+
+#progress-circle {
+  fill: #ccc;
+  position: relative;
+  left: 100px;
+}
+
+.title {
+  background-color: #fa8;
+  margin: 20px;
+}
+
+.description {
+  text-decoration: italic;
+  margin: 10px;
+}
+
+.title {
+  font-style: italic;
+}
+
+.episodeBox {
+  background-color: #ccc;
+  margin: 10px;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
 }

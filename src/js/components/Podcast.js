@@ -1,7 +1,6 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import { GET_PODCAST } from '../graphql/Queries';
-import './Podcast.css';
 
 class Podcast extends React.Component {
   constructor(props) {
