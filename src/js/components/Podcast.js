@@ -20,6 +20,7 @@ class Podcast extends React.Component {
 
           return (
             <div className="title">
+              <img src={data.podcast.imageUrl} style={{width: "160px"}}/>
               <h1>{data.podcast.title}</h1>
               <p className="description">
                 {data.podcast.description}

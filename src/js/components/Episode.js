@@ -9,11 +9,11 @@ class Episode extends React.Component {
       <PlayerContext.Consumer>
         {({ _, loadEpisode }) => (
           <div className="episodeBox">
-            {episode.title}
             <button
               className="material-icons"
               onClick={() => loadEpisode(episode)}>play_circle_outline
             </button>
+            {episode.title}
           </div>
         )}
       </PlayerContext.Consumer>

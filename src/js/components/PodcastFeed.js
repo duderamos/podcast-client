@@ -12,7 +12,7 @@ class PodcastFeed extends React.Component {
           if (error) return `Something went wrong :( ${error.message}`;
 
           return (
-            <div className="feed">
+            <div>
               {
                 data.episodes.map((episode, index) => {
                   return <div key={index}><Episode episode={episode}/></div>

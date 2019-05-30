@@ -22,13 +22,19 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="app-container">
         <PlayerContext.Provider value={this.state}>
-          <Podcast/>
-          <PodcastFeed/>
-          { this.state.playerEpisode &&
-          <Player episode={this.state.playerEpisode}/>
-          }
+          <div className="podcast-header">
+            <Podcast/>
+          </div>
+          <div className="podcast-feed">
+            <PodcastFeed/>
+          </div>
+          <div className="podcast-player">
+            { this.state.playerEpisode &&
+              <Player episode={this.state.playerEpisode}/>
+            }
+          </div>
         </PlayerContext.Provider>
       </div>
     )

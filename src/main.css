@@ -6,8 +6,34 @@ button {
   border: 0;
 }
 
-.player-box {
+html, body, #app {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  flex: 1;
+  height: 100%;
+}
+
+.podcast-header {
+  flex: 1;
+}
+
+.podcast-feed {
+  flex: 2;
+}
+
+.podcast-player {
+  flex: 1;
   background-color: #454343;
+}
+
+.player-box {
   height: 90px;
   display: flex;
   justify-content: center;
@@ -27,8 +53,7 @@ button {
 }
 
 .title {
-  background-color: #fa8;
-  margin: 20px;
+  background-color: #aaa;
 }
 
 .description {
@@ -36,14 +61,12 @@ button {
   margin: 10px;
 }
 
-.title {
-  font-style: italic;
-}
-
 .episodeBox {
-  background-color: #ccc;
   margin: 10px;
-  display: inline-block;
+  display: flex;
   vertical-align: middle;
   line-height: normal;
+  border-bottom: 1px solid #ccc;
+  color: #ddd;
+  height: 100%;
 }

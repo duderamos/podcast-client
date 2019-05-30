@@ -2,10 +2,12 @@ import gql from 'graphql-tag';
 
 const GET_PODCAST = gql`
   {
-    podcast(title: "Miçangas") {
+    podcast(title: "Spin de Notícias | Deviante") {
       title
       description
       url
+      imageUrl
+      imageTitle
     }
   }
 `;
@@ -16,8 +18,12 @@ const GET_EPISODES = gql`
       _id
       title
       url
-      duration
       currentTime
+      length
+      link
+      pubDate
+      categories
+      imageUrl
     }
   }
 `;
