@@ -7,6 +7,8 @@ class Player extends React.Component {
   constructor(props) {
     super(props);
 
+    this.cycles = 0;
+
     this.state = {
       playing: false,
       playIcon: "play_circle_filled",
@@ -21,7 +23,7 @@ class Player extends React.Component {
   }
 
   togglePlay = () => {
-    if (this.state.play) {
+    if (this.state.playing) {
       this.setState({
         playing: false,
         playIcon: "play_circle_filled"
@@ -111,8 +113,9 @@ class Player extends React.Component {
               src={episode.url}
               preload="metadata"
               onTimeUpdate={() => {
-                if ((Math.round(this.state.played) % 5) == 0) {
+                if (this.cycles++ >= 10) {
                   saveCurrentTime({ variables: { episodeId: episode._id, currentTime: this.audio.currentTime }});
+                  this.cycles = 0;
                 }
                 this.setState({ played: this.audio.currentTime });
                 this.updatePlayedAngle();
