@@ -14,7 +14,7 @@ const GET_PODCAST = gql`
 
 const GET_EPISODES = gql`
   {
-    episodes(limit: 5) {
+    episodes(limit: 100) {
       _id
       title
       url

@@ -24,15 +24,15 @@ class App extends React.Component {
     return (
       <div className="app-container">
         <PlayerContext.Provider value={this.state}>
-          <div className="podcast-header">
+          <div id="podcast-component">
             <Podcast/>
           </div>
-          <div className="podcast-feed">
+          <div id="podcast-feed-component">
             <PodcastFeed/>
           </div>
-          <div className="podcast-player">
+          <div id="podcast-player-component">
             { this.state.playerEpisode &&
-              <Player episode={this.state.playerEpisode}/>
+            <Player episode={this.state.playerEpisode}/>
             }
           </div>
         </PlayerContext.Provider>

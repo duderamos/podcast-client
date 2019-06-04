@@ -10,7 +10,7 @@ class Episode extends React.Component {
         {({ _, loadEpisode }) => (
           <div className="episodeBox">
             <button
-              className="material-icons"
+              className="material-icons episode-button"
               onClick={() => loadEpisode(episode)}>play_circle_outline
             </button>
             {episode.title}

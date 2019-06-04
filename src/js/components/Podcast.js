@@ -19,15 +19,19 @@ class Podcast extends React.Component {
           if (error) return `Something went wrong :( ${error.message}`;
 
           return (
-            <div className="title">
-              <img src={data.podcast.imageUrl} style={{width: "160px"}}/>
-              <h1>{data.podcast.title}</h1>
-              <p className="description">
-                {data.podcast.description}
-              </p>
-              <abbr>
-                <a href={data.podcast.url}>{data.podcast.url}</a>
-              </abbr>
+            <div className="podcast-header">
+              <div className="podcast-logo">
+                <img src={data.podcast.imageUrl} id="img-logo"/>
+              </div>
+              <div className="podcast-info">
+                <h1>{data.podcast.title}</h1>
+                <p className="description">
+                  {data.podcast.description}
+                </p>
+                <abbr>
+                  <a href={data.podcast.url}>{data.podcast.url}</a>
+                </abbr>
+              </div>
             </div>
           );
         }}
