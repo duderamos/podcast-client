@@ -12,12 +12,11 @@ class Player extends React.Component {
     this.state = {
       playing: false,
       playIcon: "play_circle_filled",
-      played: 0,
       playedAngle: ""
     }
   }
 
-  componentDidMount() {
+  setupProgress = () => {
     this.audio.currentTime = this.props.episode.currentTime;
     this.updatePlayedAngle();
   }
@@ -40,7 +39,7 @@ class Player extends React.Component {
 
   updatePlayedAngle = () => {
     const pi = Math.PI;
-    let angle = (this.state.played * 360) / this.audio.duration;
+    let angle = (this.audio.currentTime * 360) / this.audio.duration;
     if (Number.isNaN(this.audio.duration)) return;
     let r = ( angle * pi / 180 )
     let x = Math.sin( r ) * 25
@@ -75,6 +74,9 @@ class Player extends React.Component {
     const { episode } = this.props;
     return (
       <div className="player-box">
+        <div id="loading">
+          <img src="https://freepreloaders.com/wp-content/uploads/2019/05/puff-1.svg"/>
+        </div>
         <div id="progress-circle">
           <svg
             style={{verticalAlign: "middle"}}
@@ -103,7 +105,7 @@ class Player extends React.Component {
           </div>
           <div>
             {this.audio &&
-              this.timeFormatted(this.state.played)
+              this.timeFormatted(this.audio.currentTime)
             }
           </div>
         </div>
@@ -112,12 +114,18 @@ class Player extends React.Component {
             <audio
               src={episode.url}
               preload="metadata"
+              onCanPlay={() => {
+                document.getElementById("loading").style.display = "none";
+              }}
+              onLoadStart={() => {
+                document.getElementById("loading").style.display = "block";
+              }}
+              onLoadedMetadata={this.setupProgress}
               onTimeUpdate={() => {
                 if (this.cycles++ >= 10) {
                   saveCurrentTime({ variables: { episodeId: episode._id, currentTime: this.audio.currentTime }});
                   this.cycles = 0;
                 }
-                this.setState({ played: this.audio.currentTime });
                 this.updatePlayedAngle();
               }}
               ref={(audio) => { this.audio = audio }}
