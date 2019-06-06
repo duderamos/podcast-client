@@ -28,12 +28,14 @@ class Player extends React.Component {
         playIcon: "play_circle_filled"
       });
       this.audio.pause();
+      clearInterval(this.pingBackend);
     } else {
       this.setState({
         playing: true,
         playIcon: "pause_circle_filled"
       });
       this.audio.play();
+      setInterval(this.pingBackend, 5000);
     }
   }
 
@@ -68,6 +70,11 @@ class Player extends React.Component {
     timeString += minutes.toString().padStart(2, 0) + ':';
     timeString += seconds.toString().padStart(2, 0);
     return timeString;
+  }
+
+  pingBackend = () => {
+    const { episode } = this.props;
+    this.saveCurrentTime({ variables: { episodeId: episode._id, currentTime: this.audio.currentTime }});
   }
 
   render() {
@@ -110,7 +117,9 @@ class Player extends React.Component {
           </div>
         </div>
         <Mutation mutation={SAVE_CURRENT_TIME}>
-          {(saveCurrentTime, { data }) => (
+          {(saveCurrentTime, { data }) => {
+            this.saveCurrentTime = saveCurrentTime;
+            return (
             <audio
               src={episode.url}
               preload="metadata"
@@ -121,16 +130,10 @@ class Player extends React.Component {
                 document.getElementById("loading").style.display = "block";
               }}
               onLoadedMetadata={this.setupProgress}
-              onTimeUpdate={() => {
-                if (this.cycles++ >= 10) {
-                  saveCurrentTime({ variables: { episodeId: episode._id, currentTime: this.audio.currentTime }});
-                  this.cycles = 0;
-                }
-                this.updatePlayedAngle();
-              }}
+              onTimeUpdate={this.updatePlayedAngle}
               ref={(audio) => { this.audio = audio }}
             />
-          )}
+          )}}
         </Mutation>
       </div>
     );
