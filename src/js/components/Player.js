@@ -7,8 +7,6 @@ class Player extends React.Component {
   constructor(props) {
     super(props);
 
-    this.cycles = 0;
-
     this.state = {
       playing: false,
       playIcon: "play_circle_filled",
