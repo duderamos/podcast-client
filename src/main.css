@@ -68,7 +68,7 @@ a {
 }
 
 .player-box {
-  background-color: #454343;
+  background-color: black;
   height: 90px;
   display: flex;
   justify-content: center;
@@ -79,10 +79,15 @@ a {
   vertical-align: middle;
   line-height: normal;
   font-size: 50px;
+  color: #fff;
+}
+
+.play-icon {
+  color: #000;
 }
 
 #progress-circle {
-  fill: #ccc;
+  fill: #30e0ff;
   position: relative;
   left: 100px;
 }
