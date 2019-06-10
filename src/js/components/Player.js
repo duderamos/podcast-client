@@ -26,14 +26,14 @@ class Player extends React.Component {
         playIcon: "play_circle_filled"
       });
       this.audio.pause();
-      clearInterval(this.pingBackend);
+      clearInterval(this.pingBackendInterval);
     } else {
       this.setState({
         playing: true,
         playIcon: "pause_circle_filled"
       });
       this.audio.play();
-      setInterval(this.pingBackend, 5000);
+      this.pingBackendInterval = setInterval(this.pingBackend, 5000);
     }
   }
 
@@ -92,25 +92,25 @@ class Player extends React.Component {
               transform="translate(25, 25) scale(.95)"
               d={this.state.playedAngle}
             />
-            <circle transform="translate(25, 25)" cx="0" cy="0" r="20" fill="#454343" />
+            <circle transform="translate(25, 25)" cx="0" cy="0" r="20" fill="#fff" />
           </svg>
         </div>
         <div>
           <i className="material-icons player-icon" onClick={this.backwards}>replay_10</i>
         </div>
         <div style={{zIndex: 99}}>
-          <i className="material-icons player-icon" onClick={this.togglePlay}>{this.state.playIcon}</i>
+          <i className="material-icons player-icon play-icon" onClick={this.togglePlay}>{this.state.playIcon}</i>
         </div>
         <div>
           <i className="material-icons player-icon" onClick={this.forwards}>forward_10</i>
         </div>
-        <div stype={{display: 'flex', flexDirection: 'column'}}>
+        <div style={{color: '#fff', display: 'flex', flexDirection: 'column'}}>
           <div>
             {episode.title}
           </div>
           <div>
             {this.audio &&
-              this.timeFormatted(this.audio.currentTime)
+              `${this.timeFormatted(this.audio.currentTime)} - ${this.timeFormatted(this.audio.duration)}`
             }
           </div>
         </div>
