@@ -12,8 +12,9 @@ class Podcast extends React.Component {
   }
 
   render() {
+    const { podcastId } = this.props;
     return (
-      <Query query={GET_PODCAST}>
+      <Query query={GET_PODCAST} variables={{ id: podcastId }}>
         {({ loading, error, data }) => {
           if (loading) return 'Loading...';
           if (error) return `Something went wrong :( ${error.message}`;

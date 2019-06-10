@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 const GET_PODCAST = gql`
-  {
-    podcast(title: "Spin de Notícias | Deviante") {
+  query podcast($id: String!) {
+    podcast(_id: $id) {
       title
       description
       url
@@ -12,9 +12,19 @@ const GET_PODCAST = gql`
   }
 `;
 
-const GET_EPISODES = gql`
+const GET_PODCASTS = gql`
   {
-    episodes(limit: 100) {
+    podcasts {
+      _id
+      title
+      imageUrl
+    }
+  }
+`;
+
+const GET_EPISODES = gql`
+  query episodes($podcastId: String!) {
+    episodes(podcastId: $podcastId) {
       _id
       title
       url
@@ -28,4 +38,4 @@ const GET_EPISODES = gql`
   }
 `;
 
-export { GET_PODCAST, GET_EPISODES };
+export { GET_PODCAST, GET_PODCASTS, GET_EPISODES };

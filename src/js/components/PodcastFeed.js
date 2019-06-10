@@ -5,8 +5,9 @@ import { GET_EPISODES } from '../graphql/Queries';
 
 class PodcastFeed extends React.Component {
   render() {
+    const { podcastId } = this.props;
     return (
-      <Query query={GET_EPISODES}>
+      <Query query={GET_EPISODES} variables={{ podcastId: podcastId }}>
         {({ loading, error, data }) => {
           if (loading) return 'Loading...';
           if (error) return `Something went wrong :( ${error.message}`;
