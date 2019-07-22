@@ -1,9 +1,13 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import { GET_PODCASTS } from '../graphql/Queries';
+import { AuthContext } from '../contexts/AuthContext';
 
 class Dashboard extends React.Component {
+  static contextType = AuthContext;
+
   render() {
+    const authContext = this.context;
     const { loadPodcast } = this.props;
     return (
       <Query query={GET_PODCASTS}>
@@ -25,7 +29,8 @@ class Dashboard extends React.Component {
                 );
               })
             }
-          </div>
+              <p><a href="#" onClick={authContext.logout}>Logout</a></p>
+            </div>
           );
         }}
       </Query>
